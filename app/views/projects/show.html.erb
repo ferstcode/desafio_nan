@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+>
+      <p>
+          <strong>Name:</strong>
+          <span class="badge badge-warning"><%= @project.name %></span>
+        </p>
+        
+        <p>
+          <strong>Description:</strong>
+          <%= @project.description %>
+        </p>
+        
+        <p>
+          <%= form_with(url: add_user_project_path(@project),local: true) do |f| %>
+          <%= select_tag(:person_id, options_for_select(@people_not),prompt: 'Seleccione un Usuario  ' )%>
+          <%=  f.submit 'add user to Project',class:'btn btn-success' %>
+          <% end %>
+        </p>
+        <%= link_to 'Edit', edit_project_path(@project) %> |
+        <%= link_to 'Back', projects_path %>
+
+<h3>Users in Project:<span class="badge badge-success" ><%= @project.people.count %></span></h3>
+<ul class="list-group">
+  <% @users_in_project.each do |user| %>
+  <li class="list-group-item"><%= user.name %> <span class="badge badge-pill badge-danger"><%= link_to  "x",  delete_user_of_project_path(@project,user.id), method: :delete %></span> </li>
+  <% end %>
+</ul>

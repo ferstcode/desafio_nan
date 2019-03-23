@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+<div >  
+    <p>
+      <strong>Name:</strong>
+      <%= @person.name %>
+    </p>    
+    <%= link_to 'Edit', edit_person_path(@person) %> |
+    <%= link_to 'Back', people_path %>
+  </div>
+<h3>Projects of Person:<span class="badge badge-success" ><%= @person.projects.count %></span></h3>
+<ul class="list-group">
+  <% @projects_of_person.each do |project| %>
+  <li class="list-group-item"><%= project.name %> <span><%= link_to  "x",delete_project_of_person_path(@person,project.id), method: :delete %></span> </li>
+  <% end %>
+</ul>
